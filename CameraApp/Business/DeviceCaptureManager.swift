@@ -16,10 +16,11 @@ class DeviceCaptureManager : NSObject, ObservableObject, AVCaptureVideoDataOutpu
     case unauthorized
     case failed
   }
-
+  
   static let shared = DeviceCaptureManager()
   @Published var frame: CGImage?
-
+  var imageBuffer: CVPixelBuffer?
+  
   
   private var status = Status.unconfigured
   let session = AVCaptureSession()
@@ -27,12 +28,12 @@ class DeviceCaptureManager : NSObject, ObservableObject, AVCaptureVideoDataOutpu
   private let videoOutput = AVCaptureVideoDataOutput()
   
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-    print("get frame")
+//    print("get frame")
     
-    let buffer = sampleBuffer.imageBuffer
-    
+    imageBuffer = sampleBuffer.imageBuffer
+    let p = CGImage.create(from: imageBuffer)
     DispatchQueue.main.async {
-      self.frame = CGImage.create(from: buffer)
+      self.frame = p
     }
   }
   
@@ -71,7 +72,18 @@ class DeviceCaptureManager : NSObject, ObservableObject, AVCaptureVideoDataOutpu
     
   }
   
-  private func configure() {
+  func snapshot(path: URL?) {
+    print("snapshot")
+    let bitmapRep = NSBitmapImageRep(cgImage: frame!)
+    let data = bitmapRep.representation(using: .png, properties: [:])
+    do {
+      try data!.write(to: path!)
+    } catch{
+      print(error)
+    }
+  }
   
+  private func configure() {
+    
   }
 }
