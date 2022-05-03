@@ -10,7 +10,7 @@ import SwiftUI
 import AVFoundation
 
 struct FrameView : View {
-  @ObservedObject var manager = DeviceCaptureManager.shared
+  @ObservedObject var manager = Camera.shared
   
   private let label = Text("Video feed")
 

@@ -26,7 +26,7 @@ struct CameraApp: App {
           panel.canCreateDirectories = true
           panel.isExtensionHidden = false
           if(panel.runModal() == .OK) {
-            DeviceCaptureManager.shared.snapshot(path: panel.url)
+            Camera.shared.snapshot(path: panel.url)
           }
           
           

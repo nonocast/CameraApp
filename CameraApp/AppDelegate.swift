@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  xcccc
+//  CameraApp
 //
 //  Created by nonocast on 2022/5/1.
 //
@@ -13,12 +13,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     print("applicationDidFinishLaunching")
     
     // run device capture manager
-    DeviceCaptureManager.shared.open()
+    Camera.shared.open()
   }
   
   func applicationWillTerminate(_ aNotification: Notification) {
     // Insert code here to tear down your application
-    DeviceCaptureManager.shared.close()
+    Camera.shared.close()
   }
   
   func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {

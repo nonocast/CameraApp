@@ -12,7 +12,7 @@
 		C3D2915628204396008A14B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3D2915528204396008A14B0 /* Assets.xcassets */; };
 		C3D2915928204396008A14B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3D2915828204396008A14B0 /* Preview Assets.xcassets */; };
 		C3D2916828204527008A14B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2916428204527008A14B0 /* AppDelegate.swift */; };
-		C3D2916928204527008A14B0 /* DeviceCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2916528204527008A14B0 /* DeviceCaptureManager.swift */; };
+		C3D2916928204527008A14B0 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2916528204527008A14B0 /* Camera.swift */; };
 		C3D2916A28204527008A14B0 /* CGImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2916728204527008A14B0 /* CGImageExtension.swift */; };
 		C3D2916D2820456A008A14B0 /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2916C2820456A008A14B0 /* FrameView.swift */; };
 /* End PBXBuildFile section */
@@ -26,7 +26,7 @@
 		C3D2915A28204396008A14B0 /* CameraApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CameraApp.entitlements; sourceTree = "<group>"; };
 		C3D2916028204429008A14B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C3D2916428204527008A14B0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C3D2916528204527008A14B0 /* DeviceCaptureManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceCaptureManager.swift; sourceTree = "<group>"; };
+		C3D2916528204527008A14B0 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		C3D2916728204527008A14B0 /* CGImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImageExtension.swift; sourceTree = "<group>"; };
 		C3D2916C2820456A008A14B0 /* FrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,12 +64,13 @@
 			isa = PBXGroup;
 			children = (
 				C3D2916028204429008A14B0 /* Info.plist */,
-				C3D2916328204527008A14B0 /* Business */,
 				C3D2916B28204539008A14B0 /* Views */,
 				C3D2916628204527008A14B0 /* Extensions */,
 				C3D2915128204394008A14B0 /* CameraApp.swift */,
 				C3D2915528204396008A14B0 /* Assets.xcassets */,
 				C3D2915A28204396008A14B0 /* CameraApp.entitlements */,
+				C3D2916428204527008A14B0 /* AppDelegate.swift */,
+				C3D2916528204527008A14B0 /* Camera.swift */,
 				C3D2915728204396008A14B0 /* Preview Content */,
 			);
 			path = CameraApp;
@@ -81,15 +82,6 @@
 				C3D2915828204396008A14B0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		C3D2916328204527008A14B0 /* Business */ = {
-			isa = PBXGroup;
-			children = (
-				C3D2916428204527008A14B0 /* AppDelegate.swift */,
-				C3D2916528204527008A14B0 /* DeviceCaptureManager.swift */,
-			);
-			path = Business;
 			sourceTree = "<group>";
 		};
 		C3D2916628204527008A14B0 /* Extensions */ = {
@@ -182,7 +174,7 @@
 				C3D2916D2820456A008A14B0 /* FrameView.swift in Sources */,
 				C3D2916828204527008A14B0 /* AppDelegate.swift in Sources */,
 				C3D2916A28204527008A14B0 /* CGImageExtension.swift in Sources */,
-				C3D2916928204527008A14B0 /* DeviceCaptureManager.swift in Sources */,
+				C3D2916928204527008A14B0 /* Camera.swift in Sources */,
 				C3D2915428204394008A14B0 /* ContentView.swift in Sources */,
 				C3D2915228204394008A14B0 /* CameraApp.swift in Sources */,
 			);
