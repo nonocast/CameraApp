@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct CameraApp: App {
-  @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+  @NSApplicationDelegateAdaptor(CameraAppDelegate.self) var appDelegate
 
   var body: some Scene {
     WindowGroup {
@@ -25,13 +25,23 @@ struct CameraApp: App {
           panel.allowedContentTypes = [.png]
           panel.canCreateDirectories = true
           panel.isExtensionHidden = false
-          if(panel.runModal() == .OK) {
+          if panel.runModal() == .OK {
             Camera.shared.snapshot(path: panel.url)
           }
-          
-          
         }, label: { Text("Snapshot") })
-          
+        Button(action: {
+          let panel = NSSavePanel()
+          panel.nameFieldStringValue = "clip.mp4"
+          panel.allowedContentTypes = [.mpeg4Movie]
+          panel.canCreateDirectories = true
+          panel.isExtensionHidden = false
+          if panel.runModal() == .OK {
+            Camera.shared.startRecording(path: panel.url)
+          }
+        }, label: { Text("Start Record") })
+        Button(action: {
+          Camera.shared.stopRecording()
+        }, label: { Text("Stop Record") })
       }
     }
   }
