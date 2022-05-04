@@ -31,6 +31,8 @@ class Camera: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDe
     get { return movieOutput.isRecording }
   }
   
+  // Core Image
+  private let context = CIContext()
   
   func open() {
     print("Begin DeviceCaptureManager open")
@@ -104,6 +106,11 @@ class Camera: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDe
   }
   
   private func chooseCaptureDevice() -> AVCaptureDevice {
+    /*
+    under 10.15
+    let devices = AVCaptureDevice.devices(for: AVMediaType.video)
+    return devices[1]
+    */
     let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.externalUnknown], mediaType: .video, position: .unspecified)
     print("found \(discoverySession.devices.count) device(s)")
 
@@ -116,6 +123,12 @@ class Camera: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDe
     }
 
     // choose the best
+    /*
+     obs-virtual-camera 报错时，需要去掉codesign
+     https://obsproject.com/wiki/MacOS-Virtual-Camera-Compatibility-Guide
+     sudo codesign --remove-signature CameraApp.app
+     sudo codesign --sign - Camera.app
+     */
     let device = devices.first(where: { device in device.position == AVCaptureDevice.Position(rawValue: 0) })!
     print(device.localizedName)
     return device
@@ -125,7 +138,21 @@ class Camera: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDe
     // print("get frame")
     
     let imageBuffer = sampleBuffer.imageBuffer
-    let p = CGImage.create(from: imageBuffer)
+    let image = CGImage.create(from: imageBuffer)
+    
+    var ciImage = CIImage(cgImage: image!)
+    /* https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html#//apple_ref/doc/filter/ci/CIColorClamp
+     */
+    ciImage = ciImage.applyingFilter("CIPhotoEffectNoir")
+//    ciImage = ciImage.applyingFilter("CIComicEffect")
+//    ciImage = ciImage.applyingFilter("CICrystallize")
+//    ciImage = ciImage.applyingFilter("CIBoxBlur")
+//    ciImage = ciImage.applyingFilter("CISharpenLuminance")
+//    ciImage = ciImage.applyingFilter("CIEdges")
+//    ciImage = ciImage.applyingFilter("CIPixellate")
+    
+    let p  = context.createCGImage(ciImage, from: ciImage.extent)
+    
     DispatchQueue.main.async {
       self.frame = p
     }
